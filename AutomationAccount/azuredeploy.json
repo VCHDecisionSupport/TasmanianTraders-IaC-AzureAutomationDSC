@@ -25,11 +25,16 @@
             "metadata": {
                 "description": "The netbios name used for the AD domain."
             }
+        },
+        "autoAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "The netbios name used for the AD domain."
+            }
         }
     },
     "variables": {
         "sku": "Free",
-        "accountName": "tasmaniantradersautomation",
         "adAdminCedentialName": "addcDomainAdmin",
         "adAdminUsername": "[parameters('adAdminUsername')]",
         "adAdminPassword": "[parameters('adAdminPassword')]",
@@ -41,7 +46,7 @@
         "adDomainNetbiosDescription": "The netbios name for the domain"
     },
     "resources": [{
-        "name": "[variables('accountName')]",
+        "name": "[variables('autoAccountName')]",
         "type": "Microsoft.Automation/automationAccounts",
         "apiVersion": "2015-10-31",
         "location": "[resourceGroup().location]",
@@ -58,7 +63,7 @@
                 "apiVersion": "2015-10-31",
                 "location": "[resourceGroup().location]",
                 "dependsOn": [
-                    "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+                    "[concat('Microsoft.Automation/automationAccounts/', parameters('autoAccountName'))]"
                 ],
                 "tags": {},
                 "properties": {
@@ -72,7 +77,7 @@
                 "apiVersion": "2015-10-31",
                 "location": "[resourceGroup().location]",
                 "dependsOn": [
-                    "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+                    "[concat('Microsoft.Automation/automationAccounts/', parameters('autoAccountName'))]"
                 ],
                 "tags": {},
                 "properties": {
@@ -88,7 +93,7 @@
                 "apiVersion": "2015-10-31",
                 "location": "[resourceGroup().location]",
                 "dependsOn": [
-                    "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+                    "[concat('Microsoft.Automation/automationAccounts/', parameters('autoAccountName'))]"
                 ],
                 "tags": {},
                 "properties": {

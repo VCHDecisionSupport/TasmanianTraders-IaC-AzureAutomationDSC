@@ -3,15 +3,18 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adAdminUsername": {
-            "value": "Floater1"
+            "value": "adFloater1"
         },
         "adAdminPassword": {
-            "value": ""
+            "value": "Floater1"
         },
         "adDomainName": {
             "value": "vch.tt"
         },
         "adDomainNetbiosName": {
+            "value": "vch"
+        },
+        "autoAccountName": {
             "value": "vch"
         }
     }
