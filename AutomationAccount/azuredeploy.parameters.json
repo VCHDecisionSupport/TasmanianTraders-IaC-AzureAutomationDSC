@@ -15,7 +15,7 @@
             "value": "vch"
         },
         "autoAccountName": {
-            "value": "vch"
+            "value": "vchds-auto"
         }
     }
 }
