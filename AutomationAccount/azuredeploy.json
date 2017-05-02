@@ -46,7 +46,7 @@
         "adDomainNetbiosDescription": "The netbios name for the domain"
     },
     "resources": [{
-        "name": "[variables('autoAccountName')]",
+        "name": "[parameters('autoAccountName')]",
         "type": "Microsoft.Automation/automationAccounts",
         "apiVersion": "2015-10-31",
         "location": "[resourceGroup().location]",
