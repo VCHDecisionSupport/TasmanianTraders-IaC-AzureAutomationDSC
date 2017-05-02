@@ -33,75 +33,72 @@
         "adAdminCedentialName": "addcDomainAdmin",
         "adAdminUsername": "[parameters('adAdminUsername')]",
         "adAdminPassword": "[parameters('adAdminPassword')]",
-        "adDomainVariableName":"addcDomainName",
-        "adDomainName":"[parameters('adDomainName')]",
-        "adDomainDescription":"The domain name",
-        "adDomainNetbiosVariableName":"addcDomainNetbiosName",
-        "adDomainNetbiosName":"[parameters('adDomainNetbiosName')]",
-        "adDomainNetbiosDescription":"The netbios name for the domain"
+        "adDomainVariableName": "addcDomainName",
+        "adDomainName": "[parameters('adDomainName')]",
+        "adDomainDescription": "The domain name",
+        "adDomainNetbiosVariableName": "addcDomainNetbiosName",
+        "adDomainNetbiosName": "[parameters('adDomainNetbiosName')]",
+        "adDomainNetbiosDescription": "The netbios name for the domain"
     },
-    "resources": [
-      {
+    "resources": [{
         "name": "[variables('accountName')]",
         "type": "Microsoft.Automation/automationAccounts",
         "apiVersion": "2015-10-31",
         "location": "[resourceGroup().location]",
-        "dependsOn": [ ],
-        "tags": { },
+        "dependsOn": [],
+        "tags": {},
         "properties": {
-          "sku": {
-            "name": "[variables('sku')]"
-          }
+            "sku": {
+                "name": "[variables('sku')]"
+            }
         },
-        "resources": [
-          {
-            "name": "[variables('adAdminCedentialName')]",
-            "type": "credentials",
-            "apiVersion": "2015-10-31",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-              "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
-            ],
-            "tags": { },
-            "properties": {
-              "userName": "[variables('adAdminUsername')]",
-              "password": "[variables('adAdminPassword')]"
+        "resources": [{
+                "name": "[variables('adAdminCedentialName')]",
+                "type": "credentials",
+                "apiVersion": "2015-10-31",
+                "location": "[resourceGroup().location]",
+                "dependsOn": [
+                    "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+                ],
+                "tags": {},
+                "properties": {
+                    "userName": "[variables('adAdminUsername')]",
+                    "password": "[variables('adAdminPassword')]"
+                }
+            },
+            {
+                "name": "[variables('adDomainVariableName')]",
+                "type": "variables",
+                "apiVersion": "2015-10-31",
+                "location": "[resourceGroup().location]",
+                "dependsOn": [
+                    "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+                ],
+                "tags": {},
+                "properties": {
+                    "isEncrypted": false,
+                    "type": "String",
+                    "value": "[concat('\"',variables('adDomainName'),'\"')]",
+                    "description": "[variables('adDomainDescription')]"
+                }
+            },
+            {
+                "name": "[variables('adDomainNetbiosVariableName')]",
+                "type": "variables",
+                "apiVersion": "2015-10-31",
+                "location": "[resourceGroup().location]",
+                "dependsOn": [
+                    "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+                ],
+                "tags": {},
+                "properties": {
+                    "isEncrypted": false,
+                    "type": "String",
+                    "value": "[concat('\"',variables('adDomainNetbiosName'),'\"')]",
+                    "description": "[variables('adDomainNetbiosDescription')]"
+                }
             }
-          },
-          {
-            "name": "[variables('adDomainVariableName')]",
-            "type": "variables",
-            "apiVersion": "2015-10-31",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-              "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
-            ],
-            "tags": { },
-            "properties": {
-              "isEncrypted": false,
-              "type": "String",
-              "value": "[concat('\"',variables('adDomainName'),'\"')]",
-              "description": "[variables('adDomainDescription')]"
-            }
-          },
-          {
-            "name": "[variables('adDomainNetbiosVariableName')]",
-            "type": "variables",
-            "apiVersion": "2015-10-31",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-              "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
-            ],
-            "tags": { },
-            "properties": {
-              "isEncrypted": false,
-              "type": "String",
-              "value": "[concat('\"',variables('adDomainNetbiosName'),'\"')]",
-              "description": "[variables('adDomainNetbiosDescription')]"
-            }
-          }
         ]
-      }
-    ],
+    }],
     "outputs": {}
 }
