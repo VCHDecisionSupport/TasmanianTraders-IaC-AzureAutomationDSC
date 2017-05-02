@@ -1,8 +1,9 @@
 Set-Location -Path $PSScriptRoot
-Login-AzureRmAccount
+
+# Login-AzureRmAccount
 
 $resource_group_name = "vchds-auto-rg"
-$auto_account = "tasmaniantradersautomation"
+$auto_account = "vchds-auto"
 
 Write-Host "importAllModules..."
 .\importAllModules.ps1 -moduleAutomationAccount $auto_account -moduleResourceGroup $resource_group_name
